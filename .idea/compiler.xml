@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="itcast_shop_canal_client" />
+        <module name="itcast_shop_common" />
+        <module name="itcast_shop_data_simulator" />
+        <module name="itcast_shop_phoenix" />
+        <module name="itcast_shop_realtime_etl" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="itcast_shop_canal_client" target="1.8" />
+      <module name="itcast_shop_common" target="1.6" />
+      <module name="itcast_shop_data_simulator" target="1.8" />
+      <module name="itcast_shop_parent" target="1.8" />
+      <module name="itcast_shop_phoenix" target="1.5" />
+      <module name="itcast_shop_realtime_etl" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

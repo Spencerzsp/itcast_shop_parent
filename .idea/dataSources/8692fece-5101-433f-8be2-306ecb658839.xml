@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="flink@wbbigdata01">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="flink">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="billAndTicket"/>
+    <schema id="4" parent="1" name="cluster_yarn"/>
+    <schema id="5" parent="1" name="db_demo_schedule"/>
+    <schema id="6" parent="1" name="gmall"/>
+    <schema id="7" parent="1" name="helpingPoor"/>
+    <schema id="8" parent="1" name="information_schema"/>
+    <schema id="9" parent="1" name="kettle"/>
+    <schema id="10" parent="1" name="lu_tale"/>
+    <schema id="11" parent="1" name="mysql"/>
+    <schema id="12" parent="1" name="performance_schema"/>
+    <schema id="13" parent="1" name="sinan_opinion1"/>
+    <schema id="14" parent="1" name="spark-commerce"/>
+    <schema id="15" parent="1" name="test"/>
+    <schema id="16" parent="1" name="yarn"/>
+    <table id="17" parent="2" name="activity"/>
+    <table id="18" parent="2" name="order_detail"/>
+    <table id="19" parent="2" name="order_main"/>
+    <table id="20" parent="2" name="t_activity"/>
+    <table id="21" parent="2" name="t_activity_count"/>
+    <table id="22" parent="2" name="t_data"/>
+    <column id="23" parent="17" name="id">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="24" parent="17" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="25" parent="17" name="create_time">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="26" parent="17" name="update_time">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="27" parent="18" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="28" parent="18" name="order_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="29" parent="18" name="category_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="30" parent="18" name="categoryName">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="31" parent="18" name="sku">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="32" parent="18" name="money">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="33" parent="18" name="amount">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="34" parent="18" name="create_time">
+      <Position>8</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="35" parent="18" name="update_time">
+      <Position>9</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="36" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="37" parent="19" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="38" parent="19" name="oid">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="39" parent="19" name="create_time">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="40" parent="19" name="total_money">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="41" parent="19" name="status">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="42" parent="19" name="update_time">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="43" parent="19" name="province">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="44" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="45" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="46" parent="20" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="47" parent="20" name="last_update">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="48" parent="21" name="aid">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="21" name="event_type">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="21" name="counts">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="51" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>aid
+event_type</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="52" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="53" parent="22" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="54" parent="22" name="age">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="55" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

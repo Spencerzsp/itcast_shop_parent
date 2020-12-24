@@ -6,6 +6,8 @@ import com.bigdata.itcast.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @ description:
  * @ author: spencer
@@ -26,5 +28,34 @@ public class CartServiceImpl implements CartService {
     public CartPojo getCartDataByGoodsId(String goodsId) {
         CartPojo cartData = cartMapper.getCartDataByGoodsId(goodsId);
         return cartData;
+    }
+
+    /**
+     * 查询phoenix全部数据
+     * @return
+     */
+    @Override
+    public List<CartPojo> getCartData() {
+        List<CartPojo> cartDataList = cartMapper.getCartData();
+        return cartDataList;
+    }
+
+    /**
+     * 查询具体的userId相同的次数
+     * @param userId
+     * @return
+     */
+    @Override
+    public int getCartCountsByUserId(String userId) {
+        return cartMapper.getCartCountsByUserId(userId);
+    }
+
+    /**
+     * 查询数据条数
+     * @return
+     */
+    @Override
+    public int getCartCounts() {
+        return cartMapper.getCartCounts();
     }
 }

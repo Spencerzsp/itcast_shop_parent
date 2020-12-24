@@ -2,6 +2,8 @@ package com.bigdata.itcast.service;
 
 import com.bigdata.itcast.pojo.CartPojo;
 
+import java.util.List;
+
 /**
  * @ description:
  * @ author: spencer
@@ -15,4 +17,23 @@ public interface CartService {
      * @return
      */
     CartPojo getCartDataByGoodsId(String goodsId);
+
+    /**
+     * 查询phoenix全部数据
+     * @return
+     */
+    List<CartPojo> getCartData();
+
+    /**
+     * 查询具体的userId相同的次数
+     * @param userId
+     * @return
+     */
+    int getCartCountsByUserId(String userId);
+
+    /**
+     * 查询数据条数
+     * @return
+     */
+    int getCartCounts();
 }

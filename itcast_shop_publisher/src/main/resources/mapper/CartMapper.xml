@@ -34,4 +34,19 @@
         FROM "dwd_itcast_cart" WHERE "goodsId" = #{goodsId}
     </select>
 
+    <select id="getCartData" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM "dwd_itcast_cart"
+    </select>
+    
+    <select id="getCartCountsByUserId" resultType="java.lang.Integer">
+        SELECT COUNT(1) AS "counts" FROM "dwd_itcast_cart" WHERE "userId" = #{userId}
+    </select>
+
+    <!--查询数据条数-->
+    <select id="getCartCounts" resultType="java.lang.Integer">
+        SELECT COUNT(1) AS "total" FROM "dwd_itcast_cart"
+    </select>
+
 </mapper>

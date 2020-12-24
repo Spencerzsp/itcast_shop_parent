@@ -44,7 +44,8 @@ class GoodsDataETL(env: StreamExecutionEnvironment) extends MysqlBaseETL(env){
       var connection: Connection = _
       var table: Table = _
       override def open(parameters: Configuration): Unit = {
-        connection  = HBaseUtil.getPool().getConnection()
+//        connection  = HBaseUtil.getPool().getConnection()
+        connection = HBaseUtil.getConnection()
         table = connection.getTable(TableName.valueOf(GlobalConfigUtil.hbase_table_goods))
       }
 
@@ -163,7 +164,7 @@ class GoodsDataETL(env: StreamExecutionEnvironment) extends MysqlBaseETL(env){
 
       override def close(): Unit = {
         if (table != null) table.close()
-        if (!connection.isClosed) HBaseUtil.getPool().returnConnection(connection)
+        if (!connection.isClosed) connection.close()
       }
     })
   }

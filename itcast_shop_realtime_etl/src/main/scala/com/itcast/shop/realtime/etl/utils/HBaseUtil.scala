@@ -3,6 +3,7 @@ package com.itcast.shop.realtime.etl.utils
 import com.itcast.shop.realtime.etl.utils.pool.{ConnectionPoolConfig, HBaseConnectionPool}
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.hbase.HBaseConfiguration
+import org.apache.hadoop.hbase.client.{Connection, ConnectionFactory}
 
 
 /**
@@ -27,6 +28,11 @@ object HBaseUtil {
 
   def getPool() = {
     pool
+  }
+
+  def getConnection() = {
+    val config: Configuration = HBaseConfiguration.create()
+    ConnectionFactory.createConnection(config)
   }
 
 }

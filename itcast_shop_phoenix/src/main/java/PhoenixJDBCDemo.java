@@ -27,7 +27,7 @@ public class PhoenixJDBCDemo {
         Connection connection = DriverManager.getConnection(zks, "", "");
 
         // 3.创建prepareStatement
-        String sql = "select * from \"dwd_order_detail\"";
+        String sql = "select * from \"dwd_itcast_cart\"";
         PreparedStatement pstmt = connection.prepareStatement(sql);
 
         // 4.执行sql查询
@@ -36,9 +36,9 @@ public class PhoenixJDBCDemo {
         // 5.循环遍历
         while (resultSet.next()){
             String rowid = resultSet.getString("rowid");
-            String goodsThirdCatName = resultSet.getString("goodsThirdCatName");
+            String shopProvinceName = resultSet.getString("shopProvinceName");
 
-            System.out.println(rowid + ": "+ goodsThirdCatName);
+            System.out.println(rowid + ": "+ shopProvinceName);
         }
 
         // 6.关闭连接

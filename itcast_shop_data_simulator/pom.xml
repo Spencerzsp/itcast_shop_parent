@@ -14,6 +14,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.bigdata.itcast</groupId>
+            <artifactId>itcast_shop_realtime_etl</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
         </dependency>

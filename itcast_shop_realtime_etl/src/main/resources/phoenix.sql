@@ -30,3 +30,26 @@ CREATE LOCAL index "idx_dwd_order_detail" ON "dwd_order_detail"(
 "detail"."cityName",
 "detail"."regionName"
 );
+
+CREATE VIEW if NOT EXISTS "dwd_itcast_cart"(
+  "rowid" VARCHAR NOT NULL PRIMARY KEY ,
+  "cart"."goodsId" VARCHAR ,
+  "cart"."userId" VARCHAR ,
+  "cart"."count" VARCHAR ,
+  "cart"."guid" VARCHAR ,
+  "cart"."addTime" VARCHAR ,
+  "cart"."ip" VARCHAR ,
+  "cart"."goodsPrice" VARCHAR ,
+  "cart"."goodsName" VARCHAR ,
+  "cart"."goodsCat3" VARCHAR ,
+  "cart"."goodsCat2" VARCHAR ,
+  "cart"."goodsCat1" VARCHAR ,
+  "cart"."shopId" VARCHAR ,
+  "cart"."shopName" VARCHAR ,
+  "cart"."shopProvinceId" VARCHAR ,
+  "cart"."shopProvinceName" VARCHAR ,
+  "cart"."shopCityId" VARCHAR ,
+  "cart"."shopCityName" VARCHAR ,
+  "cart"."clientProvince" VARCHAR ,
+  "cart"."clientCity" VARCHAR
+)

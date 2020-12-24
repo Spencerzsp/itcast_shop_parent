@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_data_simulator/itcast_shop_data_simulator.iml" filepath="$PROJECT_DIR$/itcast_shop_data_simulator/itcast_shop_data_simulator.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_parent.iml" filepath="$PROJECT_DIR$/itcast_shop_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_phoenix/itcast_shop_phoenix.iml" filepath="$PROJECT_DIR$/itcast_shop_phoenix/itcast_shop_phoenix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_shop_publisher/itcast_shop_publisher.iml" filepath="$PROJECT_DIR$/itcast_shop_publisher/itcast_shop_publisher.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_realtime_etl/itcast_shop_realtime_etl.iml" filepath="$PROJECT_DIR$/itcast_shop_realtime_etl/itcast_shop_realtime_etl.iml" />
     </modules>
   </component>

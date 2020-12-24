@@ -11,6 +11,7 @@
         <module name="itcast_shop_common" />
         <module name="itcast_shop_data_simulator" />
         <module name="itcast_shop_phoenix" />
+        <module name="itcast_shop_publisher" />
         <module name="itcast_shop_realtime_etl" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
       <module name="itcast_shop_data_simulator" target="1.8" />
       <module name="itcast_shop_parent" target="1.8" />
       <module name="itcast_shop_phoenix" target="1.5" />
+      <module name="itcast_shop_publisher" target="1.8" />
       <module name="itcast_shop_realtime_etl" target="1.8" />
     </bytecodeTargetLevel>
   </component>

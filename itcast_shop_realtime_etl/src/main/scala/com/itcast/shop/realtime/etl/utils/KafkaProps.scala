@@ -34,8 +34,8 @@ object KafkaProps {
   def getKafkaProducerProperties() = {
     val props = new Properties()
     props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, GlobalConfigUtil.bootstrap_servers)
-//    props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, GlobalConfigUtil.key_serializer)
-//    props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GlobalConfigUtil.key_serializer)
+    props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, GlobalConfigUtil.key_serializer)
+    props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GlobalConfigUtil.key_serializer)
 
     props
   }

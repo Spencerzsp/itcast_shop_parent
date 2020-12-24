@@ -20,6 +20,11 @@ public class CartController {
     @Autowired
     CartService cartService;
 
+    /**
+     * 根据goodsId查询phoenix中购物车数据
+     * @param goodsId
+     * @return
+     */
     @GetMapping("/cart")
     public String getCartDataByGoodsId(@RequestParam("goodsId") String goodsId){
         CartPojo cartPojo = cartService.getCartDataByGoodsId(goodsId);
@@ -30,6 +35,10 @@ public class CartController {
         return result;
     }
 
+    /**
+     * 查询phoenix中全部购物车数据
+     * @return
+     */
     @RequestMapping("/carts")
     public String getCartData(){
         List<CartPojo> cartDataList = cartService.getCartData();
@@ -38,6 +47,11 @@ public class CartController {
         return result;
     }
 
+    /**
+     * 根据userId，查询该用户相关数据的条数
+     * @param userId
+     * @return
+     */
     @RequestMapping("/cart/{userId}")
     public String getCartDataByUserId(@PathVariable("userId") String userId){
         int counts = cartService.getCartCountsByUserId(userId);
@@ -45,10 +59,15 @@ public class CartController {
         return result;
     }
 
+    /**
+     * 查询phoenix中数据条数
+     * @return
+     */
     @RequestMapping("/cart/counts")
     public String getCartCounts(){
         int cartCounts = cartService.getCartCounts();
         String result = "数据总数：" + cartCounts;
         return result;
     }
+
 }

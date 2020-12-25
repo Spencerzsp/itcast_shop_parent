@@ -26,7 +26,7 @@ public class GetAnother3Data {
     }
 
     /**
-     * 接续第三方接口数据
+     * 获取第三方接口数据
      * @param interfaceData
      */
     public static void parseInterfaceData(String interfaceData) {

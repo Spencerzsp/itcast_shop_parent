@@ -1,5 +1,6 @@
 package com.bigdata.itcast.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.bigdata.itcast.pojo.CartPojo;
 
 import java.util.List;
@@ -32,5 +33,5 @@ public interface CartES2HBaseService {
      * @param keyword
      * @return
      */
-    List<Object> getCartDataFromHBase(String indexName, String keyword);
+    List<String> getCartDataFromHBase(String indexName, String keyword);
 }

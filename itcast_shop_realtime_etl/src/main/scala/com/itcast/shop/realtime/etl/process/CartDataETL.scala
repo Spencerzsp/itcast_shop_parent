@@ -129,12 +129,15 @@ class CartDataETL(env: StreamExecutionEnvironment) extends MQBaseETL(env){
       var table: Table = _
       override def open(parameters: Configuration): Unit = {
         connection = HBaseUtil.getConnection()
-        table = connection.getTable(TableName.valueOf("dwd_itcast_cart"))
+        table = connection.getTable(TableName.valueOf("dwd_itcast_cart2"))
       }
 
       override def invoke(cartWideEntity: CartWideEntity, context: SinkFunction.Context[_]): Unit = {
         // 构建put对象
-        val rowKey = cartWideEntity.addTime + "_" + cartWideEntity.userId
+        //  2020-12-24 10:36:31 按照时间和goodsId设计rowkey，时间精确到分钟查询
+        val dateArray: Array[String] = cartWideEntity.addTime.split(" ")
+        val timeArray: Array[String] = dateArray(1).split(":")
+        val rowKey = dateArray(0) + "_" + timeArray(0) + "_" + timeArray(1) + "_" + cartWideEntity.goodsId
         val put = new Put(Bytes.toBytes(rowKey))
 
         // 构建列名

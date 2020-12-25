@@ -1,4 +1,5 @@
 import java.lang.Thread
+import java.util.UUID
 
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.serializer.SerializerFeature
@@ -24,7 +25,7 @@ object MockCommentsData {
     val addTime: Long = System.currentTimeMillis()
     val count: Int = random.nextInt(10)
     val goodId = random.nextInt(10000) + 100000
-    val guid = "f1eeb1d9-9eec-88da-61f87ab0302c"
+    val guid = UUID.randomUUID().toString
     val ip = "218." + random.nextInt(255) + "." + random.nextInt(100) + ".100.12"
     val userId = random.nextInt(1000) + 100000
 

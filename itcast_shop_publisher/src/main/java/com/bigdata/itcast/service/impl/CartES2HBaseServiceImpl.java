@@ -1,5 +1,8 @@
 package com.bigdata.itcast.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.bigdata.itcast.service.CartES2HBaseService;
 import com.bigdata.itcast.util.ESClientUtil;
 import com.bigdata.itcast.util.HBaseUtil;
@@ -19,15 +22,14 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -125,9 +127,10 @@ public class CartES2HBaseServiceImpl implements CartES2HBaseService {
         RestHighLevelClient cleint = esClientUtil.getRestHighLevelClient();
 
         // 2.构建查询参数
-        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, "goodsName", "shopName");
+        TermQueryBuilder shopName = QueryBuilders.termQuery("shopName", keyword);
+//        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, "goodsName", "shopName");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(multiMatchQueryBuilder);
+        searchSourceBuilder.query(shopName);
         searchSourceBuilder.from(0);
         searchSourceBuilder.size(100);
         searchSourceBuilder.timeout(new TimeValue(2000, TimeUnit.SECONDS));
@@ -149,33 +152,63 @@ public class CartES2HBaseServiceImpl implements CartES2HBaseService {
         return idList;
     }
 
+    /**
+     * 根据返回的文档id(rowkey)，查询hbase中真正的数据
+     * @param indexName
+     * @param keyword
+     * @return
+     */
     @Override
-    public List<Object> getCartDataFromHBase(String indexName, String keyword) {
+    public List<String> getCartDataFromHBase(String indexName, String keyword) {
+        /**
+         * 实现步骤：
+         * 1.创建返回的list，list里面存放json字符串(方便获取对应的字段值)
+         * 2.获取rowkeyList
+         * 3.循环遍历rowkeyList，每循环一次rowkey，生成对应的一条json数据
+         * 4.当循环一个rowkey时，创建用于存放column的list，用于存放cell中的字段和值
+         * 5.将columnList转换为json字符串
+         * 6.将转换后的columnList添加到rowDataList
+         * 7.返回rowDataList
+         */
+        // 1.创建返回的list，list里面存放json字符串(方便获取对应的字段值)
+        List<String> rowDataList = new ArrayList<>();
+
+        // 2.获取rowkeyList
         List<String> rowkeyList = getCartDataByKeyword(indexName, keyword);
+
+        // 3.循环遍历rowkeyList，每循环一次rowkey，生成对应的一条json数据
         for (String rowkey : rowkeyList) {
             Connection connection = hBaseUtil.getConnection();
             Table table;
+
+            // 4.当循环一个rowkey时，创建用于存放column的list，用于存放cell中的字段和值
+             List<String> columnList = new ArrayList<>();
             try {
-               table = connection.getTable(TableName.valueOf("dwd_itcast_cart"));
+               table = connection.getTable(TableName.valueOf("dwd_itcast_cart2"));
 
                // 创建Get请求
                 Get get = new Get(Bytes.toBytes(rowkey));
                 Result result = table.get(get);
-                for (Cell cell : result.rawCells()) {
-                    System.out.println("RK: " + Bytes.toString(CellUtil.cloneRow(cell)) +
-                            ", CF: " + Bytes.toString(CellUtil.cloneFamily(cell)) +
-                            ", CN: " + Bytes.toString(CellUtil.cloneQualifier(cell)) +
-                            ", Value: " + Bytes.toString(CellUtil.cloneValue(cell))
-                    );
 
-//                    String field = Bytes.toString(CellUtil.cloneQualifier(cell));
-//                    String value = Bytes.toString(CellUtil.cloneValue(cell));
-//                    strings.add(field + ": " + value);
+                for (Cell cell : result.rawCells()) {
+                    String field = Bytes.toString(CellUtil.cloneQualifier(cell));
+                    String value = Bytes.toString(CellUtil.cloneValue(cell));
+
+                    columnList.add("\""+ field + "\"" + ":" + "\"" + value + "\"");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            // 5.将columnList转换为json字符串
+            String dataJson = columnList.toString()
+                    .replaceFirst("\\[", "{")
+                    .replaceAll("]", "}");
+
+            // 6.将转换后的columnList添加到rowDataList
+            rowDataList.add(dataJson);
         }
-        return null;
+        // 7.返回rowDataList
+        return rowDataList;
     }
 }

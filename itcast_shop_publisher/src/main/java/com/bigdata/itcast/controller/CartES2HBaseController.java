@@ -5,11 +5,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bigdata.itcast.pojo.CartPojo;
 import com.bigdata.itcast.service.CartES2HBaseService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,7 @@ import java.util.Map;
  * @ author: spencer
  * @ date: 2020/12/24 15:59
  */
+@Api(tags = "ES+HBase二级索引查询模块")
 @RestController
 public class CartES2HBaseController {
 
@@ -32,7 +31,7 @@ public class CartES2HBaseController {
      * @param indexName
      * @return
      */
-    @RequestMapping("/cart_es_hbase")
+    @GetMapping("/cart_es_hbase")
     public List<Map<String, Object>> getCartDataFromES(@RequestParam("indexName") String indexName) {
 
         return cartES2HBaseService.getCartDataFromES(indexName);
@@ -63,7 +62,7 @@ public class CartES2HBaseController {
      * @param keyword
      * @return
      */
-    @RequestMapping("/cart_es/{indexName}/{keyword}")
+    @GetMapping("/cart_es/{indexName}/{keyword}")
     public List<String> getCartDataByKeyword(@PathVariable("indexName") String indexName,
                                              @PathVariable("keyword") String keyword) {
         List<String> idList = cartES2HBaseService.getCartDataByKeyword(indexName, keyword);
@@ -71,7 +70,7 @@ public class CartES2HBaseController {
 
     }
 
-    @RequestMapping("/cart_es_hbase/{indexName}/{keyword}")
+    @GetMapping("/cart_es_hbase/{indexName}/{keyword}")
     public List<String> getCartDataFromHBase(@PathVariable("indexName") String indexName,
                                        @PathVariable("keyword") String keyword) {
         List<String> list = cartES2HBaseService.getCartDataFromHBase(indexName, keyword);

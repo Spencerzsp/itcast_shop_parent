@@ -3,6 +3,10 @@ package com.bigdata.itcast.controller;
 import com.alibaba.fastjson.JSON;
 import com.bigdata.itcast.pojo.CartPojo;
 import com.bigdata.itcast.service.CartService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +17,7 @@ import java.util.List;
  * @ author: spencer
  * @ date: 2020/12/24 11:07
  */
+@Api(tags = "Phnenix JDBC整合Mybatis查询hbase模块")
 @RestController
 public class CartController {
 
@@ -25,8 +30,11 @@ public class CartController {
      * @param goodsId
      * @return
      */
+    @ApiOperation("根据goodsId查询phoenix中购物车数据")
     @GetMapping("/cart")
-    public String getCartDataByGoodsId(@RequestParam("goodsId") String goodsId){
+    public String getCartDataByGoodsId(
+            @ApiParam(name = "goodsId", value = "商品id")
+            @RequestParam("goodsId") String goodsId){
         CartPojo cartPojo = cartService.getCartDataByGoodsId(goodsId);
 
         String result = JSON.toJSONString(cartPojo);
@@ -39,7 +47,8 @@ public class CartController {
      * 查询phoenix中全部购物车数据
      * @return
      */
-    @RequestMapping("/carts")
+    @ApiOperation("查询phoenix中全部购物车数据")
+    @GetMapping("/carts")
     public String getCartData(){
         List<CartPojo> cartDataList = cartService.getCartData();
         String result = JSON.toJSONString(cartDataList);
@@ -52,8 +61,11 @@ public class CartController {
      * @param userId
      * @return
      */
-    @RequestMapping("/cart/{userId}")
-    public String getCartDataByUserId(@PathVariable("userId") String userId){
+    @ApiOperation("根据userId，查询该用户相关数据的条数")
+    @GetMapping("/cart/{userId}")
+    public String getCartDataByUserId(
+            @ApiParam(name = "userId", value = "用户id")
+            @PathVariable("userId") String userId){
         int counts = cartService.getCartCountsByUserId(userId);
         String result = userId + ": " + counts;
         return result;
@@ -63,7 +75,8 @@ public class CartController {
      * 查询phoenix中数据条数
      * @return
      */
-    @RequestMapping("/cart/counts")
+    @ApiOperation("查询phoenix中数据条数")
+    @GetMapping("/cart/counts")
     public String getCartCounts(){
         int cartCounts = cartService.getCartCounts();
         String result = "数据总数：" + cartCounts;

@@ -2,23 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bigdata.itcast.mapper.CartMapper">
-    <!--<select id="getDau" resultType="java.lang.Long">-->
-        <!--select count(*) from GMALL0831_DAU where LOGDATE=#{date}-->
-    <!--</select>-->
-
-    <!--获取日活明细-->
-    <!--返回结果类型
-        hour: 10点 count: 100
-        hour: 11点 count: 110
-        hour: 12点 count: 120
-        ...
-    -->
-    <!--返回值类型的说明-->
-    <!--<resultMap id="hourDauList" type="java.util.Map" autoMapping="true"></resultMap>-->
-    <!--<select id="getHourDau" resultMap="hourDauList">-->
-        <!--select LOGHOUR,count(*) COUNT from GMALL0831_DAU where LOGDATE=#{date} group by LOGHOUR-->
-    <!--</select>-->
-
     <resultMap id="BaseResultMap" type="com.bigdata.itcast.pojo.CartPojo">
         <id column="rowid" jdbcType="VARCHAR" property="rowid"/>
         <id column="goodsId" jdbcType="VARCHAR" property="goodsId"/>

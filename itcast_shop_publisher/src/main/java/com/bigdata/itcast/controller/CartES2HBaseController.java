@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @ description:
+ * @ description: ES+HBase二级索引，实现快速搜索hbase中的数据
  * @ author: spencer
  * @ date: 2020/12/24 15:59
  */

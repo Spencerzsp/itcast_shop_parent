@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @ description:
+ * @ description: 使用phoenix JDBC + Mybatis整合，实现对hbase数据的查询
  * @ author: spencer
  * @ date: 2020/12/24 11:07
  */

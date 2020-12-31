@@ -17,7 +17,7 @@ import scala.util.Random
   * @ author: spencer
   * @ date: 2020/12/23 16:57
   */
-object MockCommentsData {
+object MockCartData {
 
   def generateData() = {
 

@@ -5,10 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_canal_client/itcast_shop_canal_client.iml" filepath="$PROJECT_DIR$/itcast_shop_canal_client/itcast_shop_canal_client.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_common/itcast_shop_common.iml" filepath="$PROJECT_DIR$/itcast_shop_common/itcast_shop_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_data_simulator/itcast_shop_data_simulator.iml" filepath="$PROJECT_DIR$/itcast_shop_data_simulator/itcast_shop_data_simulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_shop_druid/itcast_shop_druid.iml" filepath="$PROJECT_DIR$/itcast_shop_druid/itcast_shop_druid.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_parent.iml" filepath="$PROJECT_DIR$/itcast_shop_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_phoenix/itcast_shop_phoenix.iml" filepath="$PROJECT_DIR$/itcast_shop_phoenix/itcast_shop_phoenix.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_publisher/itcast_shop_publisher.iml" filepath="$PROJECT_DIR$/itcast_shop_publisher/itcast_shop_publisher.iml" />
       <module fileurl="file://$PROJECT_DIR$/itcast_shop_realtime_etl/itcast_shop_realtime_etl.iml" filepath="$PROJECT_DIR$/itcast_shop_realtime_etl/itcast_shop_realtime_etl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itcast_shop_user_behavior/itcast_shop_user_behavior.iml" filepath="$PROJECT_DIR$/itcast_shop_user_behavior/itcast_shop_user_behavior.iml" />
     </modules>
   </component>
 </project>

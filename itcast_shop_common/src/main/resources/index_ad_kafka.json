@@ -1,0 +1,48 @@
+{"type": "kafka",
+  "ioConfig": {
+    "type": "kafka",
+    "consumerProperties": {
+      "bootstrap.servers": "wbbigdata00:9092"
+    },
+    "topic": "metrics"
+  },
+  "tuningConfig": {
+    "type": "kafka"
+  },
+  "dataSchema": {
+    "dataSource": "metrics",
+    "granularitySpec": {
+      "type": "uniform",
+      "segmentGranularity": "HOUR",
+      "queryGranularity": "HOUR",
+      "rollup": true
+    },
+    "parser": {
+      "type": "string",
+      "parseSpec": {
+        "format": "json",
+        "timestampSpec": {
+          "column": "time",
+          "format": "iso"
+        },
+        "dimensionsSpec": {
+          "dimensions": [
+            "url",
+            "user"
+          ]
+        }
+      }
+    },
+    "metricsSpec": [
+      {
+        "name": "count",
+        "type": "count"
+      },
+      {
+        "name": "sum_latencyMs",
+        "type": "longSum",
+        "fieldName": "latencyMs"
+      }
+    ]
+  }
+}

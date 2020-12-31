@@ -128,7 +128,8 @@ public class CartES2HBaseServiceImpl implements CartES2HBaseService {
 
         // 2.构建查询参数
         TermQueryBuilder shopName = QueryBuilders.termQuery("shopName", keyword);
-//        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, "goodsName", "shopName");
+        MultiMatchQueryBuilder multiMatchQueryBuilder1 = QueryBuilders.multiMatchQuery(keyword, "goodsName");
+        MultiMatchQueryBuilder multiMatchQueryBuilder2 = QueryBuilders.multiMatchQuery(keyword, "shopName");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(shopName);
         searchSourceBuilder.from(0);

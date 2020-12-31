@@ -1,0 +1,49 @@
+{"type": "kafka",
+  "dataSchema": {
+    "dataSource": "metrics-kafka",
+    "parser": {
+      "type": "string",
+      "parseSpec": {
+        "timestampSpec": {
+          "column": "time",
+          "format": "auto"
+        },
+        "dimensionsSpec": {
+          "dimensions": ["url", "user"]
+        },
+        "format": "json"
+      }
+    },
+    "granularitySpec": {
+      "type": "uniform",
+      "segmentGranularity": "hour",
+      "queryGranularity": "none"
+    },
+    "metricsSpec": [{
+      "type": "count",
+      "name": "views"
+    },
+      {
+        "name": "latencyMs",
+        "type": "doubleSum",
+        "fieldName": "latencyMs"
+      }
+    ]
+  },
+  "ioConfig": {
+    "topic": "metrics",
+    "consumerProperties": {
+      "bootstrap.servers": "wbbigdata00:9092,wbbigdata01:9092,wbbigdata02:9092",
+      "group.id": "kafka-indexing-service",
+      "security.protocol": "SASL_PLAINTEXT",
+      "sasl.mechanism": "GSSAPI"
+    },
+    "taskCount": 1,
+    "replicas": 1,
+    "taskDuration": "PT1H"
+  },
+  "tuningConfig": {
+    "type": "kafka",
+    "maxRowsInMemory": "100000"
+  }
+}

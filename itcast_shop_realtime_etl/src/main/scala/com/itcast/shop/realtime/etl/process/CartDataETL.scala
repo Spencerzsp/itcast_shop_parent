@@ -8,14 +8,24 @@ import com.itcast.canal.util.IPSeeker
 import com.itcast.shop.realtime.etl.`trait`.MQBaseETL
 import com.itcast.shop.realtime.etl.bean._
 import com.itcast.shop.realtime.etl.utils.{GlobalConfigUtil, HBaseUtil, RedisUtil}
-import org.apache.flink.api.common.functions.RichMapFunction
+import org.apache.flink.api.common.functions.{AggregateFunction, RichMapFunction}
+import org.apache.flink.api.common.state.{ListState, ListStateDescriptor, ValueState}
 import org.apache.flink.configuration.Configuration
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction
 import org.apache.flink.streaming.api.functions.sink.{RichSinkFunction, SinkFunction}
+import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
 import org.apache.flink.streaming.api.scala._
+import org.apache.flink.streaming.api.scala.function.ProcessWindowFunction
+import org.apache.flink.streaming.api.windowing.time.Time
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow
+import org.apache.flink.table.shaded.org.joda.time.Seconds
+import org.apache.flink.util.Collector
 import org.apache.hadoop.hbase.TableName
 import org.apache.hadoop.hbase.client.{Connection, Put, Table}
 import org.apache.hadoop.hbase.util.Bytes
 import redis.clients.jedis.Jedis
+
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 /**
   * @ description: 购物车数据的实时ETL
@@ -194,5 +204,69 @@ class CartDataETL(env: StreamExecutionEnvironment) extends MQBaseETL(env){
         if (connection.isClosed) connection.close()
       }
     })
+
+//    /**
+//      * 需求一：统计购物车数据的pv
+//      */
+//    val cartWideWatermarkDataStream: DataStream[CartWideEntity] = cartWideDataStream.assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor[CartWideEntity](Time.seconds(1)) {
+//      override def extractTimestamp(t: CartWideEntity): Long = t.addTime.toLong
+//    })
+//
+//    cartWideWatermarkDataStream.keyBy(_.userId)
+//      .timeWindow(Time.seconds(9), Time.seconds(3))
+//      .aggregate(new AggregateFunction[CartWideEntity, Long, Long] {override def add(value: CartWideEntity, accumulator: Long): Long = accumulator + 1
+//
+//        override def createAccumulator(): Long = 0L
+//
+//        override def getResult(accumulator: Long): Long = accumulator
+//
+//        override def merge(a: Long, b: Long): Long = a + b
+//      }, new ProcessWindowFunction[Long, String, String, TimeWindow] {
+//        override def process(key: String, context: Context, input: Iterable[Long], out: Collector[String]): Unit = {
+//          out.collect(key + "\\|" + context.window.getEnd + "\\|" + input.iterator.next())
+//        }
+//      })
+//      .keyBy(_.split("\\|")(1))
+//      .process(new KeyedProcessFunction[String, String, String] {
+//
+//        var valueState: ListState[String] = _
+//        /**
+//          * 初始化state
+//          * @param parameters
+//          */
+//        override def open(parameters: Configuration): Unit = {
+//          val userCountDescriptor = new ListStateDescriptor[String](
+//            "user_count",
+//            classOf[String]
+//          )
+//          valueState = getRuntimeContext.getListState(userCountDescriptor)
+//        }
+//
+//        override def processElement(value: String, ctx: KeyedProcessFunction[String, String, String]#Context, out: Collector[String]): Unit = {
+//          // 将新来的数据添加到状态中
+//          valueState.add(value)
+//
+//          // 注册一个定时器触发
+//          ctx.timerService().registerEventTimeTimer(value.split("\\|")(1).toLong + 1)
+//
+//        }
+//
+//        /**
+//          * 真正触发执行
+//          * @param timestamp
+//          * @param ctx
+//          * @param out
+//          */
+//        override def onTimer(timestamp: Long, ctx: KeyedProcessFunction[String, String, String]#OnTimerContext, out: Collector[String]): Unit = {
+//          // 创建存放valueState存放的list
+//          val list = new ListBuffer[String]
+//          import scala.collection.JavaConversions._
+//          for(value <- valueState.get()){
+//            list += value
+//          }
+//        }
+//
+//        override def close(): Unit = super.close()
+//      })
   }
 }
